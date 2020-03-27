@@ -1,6 +1,6 @@
 # EF Scripts
 
-Scripts and datavis to help with EF team building.
+Scripts and datavis to help with [EF](https://www.joinef.com/) team building.
 
 ## Usage
 
