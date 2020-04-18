@@ -1,0 +1,1 @@
+[...document.querySelectorAll('[aria-label="intercom-london (channel)"]')[0].querySelectorAll('.c-message_list__day_divider__label__pill, .c-timestamp__label, .c-message_kit__text')].map(n => n.innerText).join('\n')
