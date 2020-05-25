@@ -12,7 +12,8 @@ data = data %>%
 	full_join(combinations, by = c("Timestamp" = "Timestamp", "Group" = "Group")) %>%
 	mutate(Count = ifelse(is.na(Count), 0, Count)) %>%
 	arrange(Timestamp, Group) %>%
-	mutate(Group = factor(Group, levels = c("Sole Founders (1st time)", "In a Team (1st time)", "Sole Founders (2nd time)", "In a Team (2nd time)", "Sole Founders (3rd time)", "In a Team (3rd time)", "Sole Founders (4th time)", "In a Team (4th time)", "Sole Founders (5th time)", "In a Team (5th time)")))
+	#mutate(Group = factor(Group, levels = c("Sole Founders (1st time)", "In a Team (1st time)", "Sole Founders (2nd time)", "In a Team (2nd time)", "Sole Founders (3rd time)", "In a Team (3rd time)", "Sole Founders (4th time)", "In a Team (4th time)", "Sole Founders (5th time)", "In a Team (5th time)")))
+	mutate(Group = factor(Group, levels = c("Sole Founders", "In a Team")))
 
 ggplot(data, aes(x = as.POSIXct(Timestamp/1000, origin="1970-01-01"), y = Count, fill = Group)) +
 	geom_area() +

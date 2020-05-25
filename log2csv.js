@@ -1,6 +1,8 @@
 const fs = require('fs');
 const moment = require('moment');
 
+const grouped = true;
+
 let log = fs.readFileSync('./ld14-intercom-log.txt', 'utf8');
 
 let timeRegex  = /^((\d?\d):(\d\d) ?(AM|PM)?)$/;
@@ -26,12 +28,19 @@ let onChange = () => {
 			soleByNum[p.teamCount] = (soleByNum[p.teamCount] || 0) + 1;
 	}
 	soleByNum[0] = 86 - (Object.values(people).length - (soleByNum[0] || 0));
-	for (let i = 0, len = Math.max(soleByNum.length, teamsByNum.length); i < len; ++i) {
-		let j = i + 1;
-		let sole  = soleByNum[i] || 0;
-		console.log(`${+date},${sole},Sole Founders (${j}${j === 1 ? 'st' : j === 2 ? 'nd' : j === 3 ? 'rd' : 'th'} time)`);
-		let teams = teamsByNum[i] || 0;
-		console.log(`${+date},${teams},In a Team (${j}${j === 1 ? 'st' : j === 2 ? 'nd' : j === 3 ? 'rd' : 'th'} time)`);
+	if (grouped) {
+		let sole = soleByNum.reduce((acc, curr) => acc += (curr || 0), 0);
+		console.log(`${+date},${sole},Sole Founders`);
+		let teams = teamsByNum.reduce((acc, curr) => acc += (curr || 0), 0);
+		console.log(`${+date},${teams},In a Team`);
+	} else {
+		for (let i = 0, len = Math.max(soleByNum.length, teamsByNum.length); i < len; ++i) {
+			let j = i + 1;
+			let sole  = soleByNum[i] || 0;
+			console.log(`${+date},${sole},Sole Founders (${j}${j === 1 ? 'st' : j === 2 ? 'nd' : j === 3 ? 'rd' : 'th'} time)`);
+			let teams = teamsByNum[i] || 0;
+			console.log(`${+date},${teams},In a Team (${j}${j === 1 ? 'st' : j === 2 ? 'nd' : j === 3 ? 'rd' : 'th'} time)`);
+		}
 	}
 };
 
