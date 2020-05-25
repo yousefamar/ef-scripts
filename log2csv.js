@@ -25,7 +25,7 @@ let onChange = () => {
 		else
 			soleByNum[p.teamCount] = (soleByNum[p.teamCount] || 0) + 1;
 	}
-	soleByNum[0] = 84 - (Object.values(people).length - (soleByNum[0] || 0));
+	soleByNum[0] = 86 - (Object.values(people).length - (soleByNum[0] || 0));
 	for (let i = 0, len = Math.max(soleByNum.length, teamsByNum.length); i < len; ++i) {
 		let j = i + 1;
 		let sole  = soleByNum[i] || 0;
